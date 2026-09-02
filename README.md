@@ -78,11 +78,19 @@ VAULT=<vault from demo> node agent/rebalance.mjs          # DRY_RUN=1 to only pr
 
 ## Deployments
 
-| Network | Contract | Address |
-|---|---|---|
-| Robinhood Chain testnet (46630) | see `deployments/46630.json` | — |
+**Robinhood Chain testnet (chain id 46630)** — all sources verified on Blockscout.
 
-Testnet has no Chainlink equity feeds or stock-token liquidity yet, so the Deploy script also ships demo Stock Tokens (`TSLA`, `AAPL`, `NVDA`) with feeds seeded from Robinhood's public price API and an oracle-priced demo router. On mainnet (4663) only the oracle + factory are deployed and real feeds are registered.
+| Contract | Address |
+|---|---|
+| ChainlinkStockOracle | [`0xDFB796EB0213aecAdC740Fc49eE30A5FDbdBFB66`](https://explorer.testnet.chain.robinhood.com/address/0xDFB796EB0213aecAdC740Fc49eE30A5FDbdBFB66) |
+| ReinsFactory | [`0xb114edbACb67b912e1981d1206337d6A6906DE4e`](https://explorer.testnet.chain.robinhood.com/address/0xb114edbACb67b912e1981d1206337d6A6906DE4e) |
+| ReinsVault implementation | [`0x7E068Bc00928F62b312435A109BDd5e1f6CF7d67`](https://explorer.testnet.chain.robinhood.com/address/0x7E068Bc00928F62b312435A109BDd5e1f6CF7d67) |
+| FairRouter (demo DEX) | [`0x5322F1309d5080B5e387C26A44b556933F974a9c`](https://explorer.testnet.chain.robinhood.com/address/0x5322F1309d5080B5e387C26A44b556933F974a9c) |
+| TSLA / AAPL / NVDA demo tokens | `0xBA7B0314EbbB17F786BC7a69eB0f997BC566Ea3F` / `0x5e3C9094483E6263A38559Af4Fa5B17Daae3e753` / `0xE6E49fe146F5BafB0dec4D670E709EC74e745C01` |
+
+The full demo was run on testnet against vault [`0x8B7EDa130B54c89aeea454018CAe0dE7b95e62f8`](https://explorer.testnet.chain.robinhood.com/address/0x8B7EDa130B54c89aeea454018CAe0dE7b95e62f8): [deposit](https://explorer.testnet.chain.robinhood.com/tx/0x14de5fdefa3873c67ee5a72efcb1f2326083c923646ee34384b9c48000b5f473) → [grant](https://explorer.testnet.chain.robinhood.com/tx/0xab90bedc04a672f3b46d6e768717825535dbe50b4f2f2851ba4a8db8f6f5d8ce) → [agentSwap](https://explorer.testnet.chain.robinhood.com/tx/0x9d5a0d55f690138c7af88c7a1d64347fec2ff9e93b469df1117d18ba678a6886) → over-cap swap reverted → [agentPay](https://explorer.testnet.chain.robinhood.com/tx/0x74801417ceb2b9219b6e35e275eecf477f014df72a7b14907e13ae7300f7931e) → [revoke](https://explorer.testnet.chain.robinhood.com/tx/0xd30db7994bb4e1116c1db1ed6376dc87c3d05b7bce517c6c9a7deb863b80d028) → [withdraw](https://explorer.testnet.chain.robinhood.com/tx/0xe4b7b8b80508924f3787cdcbc78463863630e2b061b170dd9fcae4db3b6146a0).
+
+Testnet has no Chainlink equity feeds or stock-token liquidity yet, so the Deploy script also ships demo Stock Tokens with feeds seeded from Robinhood's public price API and an oracle-priced demo router. On mainnet (4663) only the oracle + factory are deployed and real feeds are registered.
 
 ```bash
 TESTNET_DEPLOYER_KEY=0x<throwaway key with testnet ETH> ./deploy_testnet.sh
