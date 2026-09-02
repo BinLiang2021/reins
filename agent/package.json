@@ -1,0 +1,9 @@
+{
+  "name": "reins-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reference AI-agent loop that rebalances a Reins vault strictly inside its granted policy.",
+  "scripts": { "rebalance": "node rebalance.mjs" },
+  "dependencies": { "viem": "^2.21.0" }
+}
